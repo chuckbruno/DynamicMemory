@@ -6,7 +6,7 @@
 #include <cstdlib>
 #include <cstring>
 
-enum Bones
+enum class Bones
 {
     Bone_Entity = 0,
     Bone_Hips = 1,
@@ -26,15 +26,22 @@ int getFileSize(const char* filename)
 
 }
 
-
 int main()
 {
     //char* t = (char*)malloc(100 * sizeof(char));
     FILE* f = fopen("data.txt", "w");
     if (f == NULL)
     {
-        std::cerr << "open data file failed" << std::endl;
+        std::cerr << "open file failed" << std::endl;
+        return -1;
     }
+
+    //just test enum functionality
+    //Bones num = Bones::Bone_Hips;
+    //if (num == Bones::Bone_Entity)
+    //{
+    //    return 0;
+    //}
 
     char msg[] = "this";
     std::cout << strlen(msg) << std::endl;
@@ -42,9 +49,9 @@ int main()
     FILE* fr = fopen("create_cube.mel", "r");
     if (fr == NULL)
     {
-        std::cerr << "open mel file failed" << std::endl;
+        std::cerr << "open file failed" << std::endl;
+        return -1;
     }
-
     char gg[100];
     long int n = getFileSize("create_cube.mel");
     if (n == -1)
@@ -77,6 +84,7 @@ int main()
     for (int i = 0; i < strlen(t); i++)
     {
         t[i] = t[i] + 1;
+        t[i]++;
     }
     fwrite(t, sizeof(char), strlen(t), f);
 
